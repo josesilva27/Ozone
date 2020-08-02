@@ -4,8 +4,7 @@ import zipfile
 
 def main ():
     mi_socket = socket.socket()
-    mi_socket.bind( ('localhost',8000) )
-    mi_socket.listen(5)
+    mi_socket.connect ( ('localhost',8000) )
  
     
     if os.path.exists("cliente")==True:             #compruebo que existe carpeta
@@ -15,12 +14,11 @@ def main ():
         else:
             while True: 
                 conexion,addr = mi_socket.accept()
-                conexion.send("cliente conectado")
+                conexion.send('cliente conectado')
 
                 file = open ('Prueba.zip','r')
                 input_data =conexion.recv(1024)
-                file.write (input_data)
-                conexion.send ("archivo descargado por el cliente")
+                file.read (input_data)
                 break
 
         with zipfile.ZipFile('Prueba.zip','r') as myzip:        #descomprimo el archivo ZIP

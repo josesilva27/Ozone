@@ -27,12 +27,12 @@ def main ():
                 print (addr)
 
                 file = open ("Prueba.zip","rb")
-                content = file.read (1024)
+                
 
                 while True:
+                    file.write(1024)
                     conexion.send(content)      #envio contenido
-                    content = file.read (1024)
-                    conexion.send("descarga completa")
+                    data = conexion.recv(1204)
                 break
 
             conexion.close()
